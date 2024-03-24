@@ -1,0 +1,38 @@
+Write SQL queries to
+1. Find the names of aircraft such that all pilots certified to operate them have salaries more than Rs.80, 000.
+2. For each pilot who is certified for more than three aircrafts, find the emp_id and the maximum
+cruisingrange of the aircraft for which she or he is certified.
+3. Find the names of pilots whose salary is less than the price of the cheapest route from Bengaluru to
+Mumbai.
+4. Find the aids of all aircraft that can be used on routes from Bengaluru to New Delhi
+5. Find the employee name and salary earning second highest salary.
+
+CREATE TABLE AIRCRAFT (
+AID INT,
+ANAME VARCHAR(15),
+CRUISINGRANGE INT,
+PRIMARY KEY (AID));
+
+CREATE TABLE FLIGHTS (
+FLIGHT_NUM INT,
+SOURCE VARCHAR(15),
+DESTINATION VARCHAR(15),
+DISTANCE INT,
+DEPARTS VARCHAR(05),
+ARRIVES VARCHAR(05),
+PRICES INT,
+PRIMARY KEY(FLIGHT_NUM),
+FOREIGN KEY (FLIGHT_NUM) REFERENCES AIRCRAFT(AID) ON DELETE CASCADE);
+
+CREATE TABLE EMPLOYEES(
+EMP_ID VARCHAR(10),
+ENAME VARCHAR(15),
+SALARY INT,
+PRIMARY KEY (EMP_ID));
+
+CREATE TABLE CERTIFIED(
+EMP_ID VARCHAR(10),
+AID INT,
+PRIMARY KEY(EMP_ID,AID),
+FOREIGN KEY (EMP_ID) REFERENCES EMPLOYEES(EMP_ID) ON DELETE CASCADE,
+FOREIGN KEY (AID) REFERENCES AIRCRAFT(AID) ON DELETE CASCADE);
